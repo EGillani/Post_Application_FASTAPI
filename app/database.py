@@ -8,7 +8,6 @@ SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.
                           f"{settings.database_hostname}:{settings.database_port}/{settings.database_name}"
 
 #responsible for establishing that connection 
-print(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

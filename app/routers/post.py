@@ -1,5 +1,6 @@
 from typing import List, Optional
 from fastapi import Response, status, HTTPException, Depends, APIRouter
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from .. import models,schemas,oauth2
 from ..database import get_db
@@ -10,17 +11,17 @@ router = APIRouter(
 )
 #NOTE: HE MADE ALL POSTS ENDPOINT PUBLIC (NOT POSTS SPECIFIC TO THE USER)
 #get all the posts 
-@router.get("/", response_model=List[schemas.Post])
+@router.get("/", response_model=List[schemas.PostOut])
 #whatever type of you put for the dependency returns doesn't matter 
 #limit - brings back only a certain number of posts but max 10 
 #skip - skips over posts (useful for pagination)
 def get_posts(db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user),
 limit: int = 10, skip: int = 0, search: Optional[str] = ""):
-    #grab every entry in the post table and performs a query 
-    #posts = db.query(models.Post).all()
 
-    #posts = db.query(models.Post).filter(models.Post.user_id == current_user.id).all()
-    posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+    #by default its a left inner join 
+    #also filtering at the same time 
+    posts = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+
     return posts
 
 #adding a new post
@@ -38,17 +39,17 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), curren
 
     return new_post
 
-@router.get("/{id}", response_model=schemas.Post)
+@router.get("/{id}", response_model=schemas.PostOut)
 #still want it as an int to make sure the type validation for the route works (user doesn't type in the route incorrectly)
 #don't use .all() because it will keep looking for all matches, we know it only exists once 
 def get_posts(id: int, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
-    #print(current_user.email)
-    post = db.query(models.Post).filter(models.Post.id == id).first()
+    post = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.id == id).first()
+
     if not post: 
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail=f"post with id: {id} was not found")
 
-    if post.user_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
+    # if post.user_id != current_user.id:
+    #     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
     return  post
 
 #for delete technically you shouldn't send any data back for 204
