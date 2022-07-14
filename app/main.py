@@ -33,5 +33,5 @@ app.include_router(vote.router)
 #path operation
 @app.get("/") 
 def root(): 
-    return {"message": "Hello World"} 
+    return {"message": "Welcome to my post application"} 
 
