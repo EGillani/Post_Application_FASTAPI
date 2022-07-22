@@ -3,6 +3,8 @@ from . import models
 from .database import engine
 from .routers import post, user, auth,vote
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+
 
 
 #will create our models (this will create the posts table automatically)
@@ -30,8 +32,15 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
+
+#path of lookalike google digital asset file to supress warnings
+asset_link_file = './assetlinks.json'
+
 #path operation
 @app.get("/") 
 def root(): 
     return {"message": "Welcome to my post application"} 
 
+@app.get("/.well-known/assetlinks.json", response_class=FileResponse)
+def suppress_google_warnings():
+    return asset_link_file

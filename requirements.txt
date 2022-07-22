@@ -13,9 +13,12 @@ ecdsa==0.17.0
 email-validator==1.2.1
 fastapi==0.75.2
 greenlet==1.1.2
+gunicorn==20.1.0
 h11==0.13.0
 httptools==0.4.0
 idna==3.3
+importlib-metadata==4.12.0
+importlib-resources==5.8.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 Mako==1.2.1
@@ -36,9 +39,10 @@ six==1.16.0
 sniffio==1.2.0
 SQLAlchemy==1.4.36
 starlette==0.17.1
-typing-extensions==4.2.0
+typing_extensions==4.2.0
 ujson==5.2.0
 urllib3==1.26.9
 uvicorn==0.17.6
 watchgod==0.8.2
 websockets==10.3
+zipp==3.8.1
