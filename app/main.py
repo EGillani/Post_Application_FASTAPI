@@ -42,8 +42,8 @@ def root():
     return {"message": "Welcome to my post application", 
             "instructions" : 
                 [f"""type "/docs" in the url to access the api schema""", 
-                 "register for an account", 
-                 "login to access the other api endpoints (api automatically authenticated from login)"]} 
+                 f"""register for an account using "Creater User" """, 
+                 f"""login to access the other api endpoints (all endpoints authenticated automatically for session)"""]} 
 
 @app.get("/.well-known/assetlinks.json", response_class=FileResponse, include_in_schema=False)
 def suppress_google_warnings():
