@@ -9,4 +9,4 @@ nginx
 gunicorn.service
 *.zip
 *.docx
-.tmp
+*.tmp

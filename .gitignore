@@ -3,4 +3,4 @@ venv/
 .env
 *.zip
 *.docx
-.tmp
+*.tmp
