@@ -37,7 +37,7 @@ app.include_router(vote.router)
 asset_link_file = './assetlinks.json'
 
 #path operation
-@app.get("/") 
+@app.get("/", include_in_schema=False) 
 def root(): 
     return {"message": "Welcome to my post application", 
             "instructions" : 
