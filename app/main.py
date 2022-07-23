@@ -7,8 +7,8 @@ from fastapi.responses import FileResponse
 
 
 
-#will create our models (this will create the posts table automatically)
-#now uncommented since I implemented alembic 
+#this will create our models (this will create the posts table automatically)
+#now uncommented since I implemented alembic (handles updates of our table schema and changes which sqlalchemy lacks)
 #models.Base.metadata.create_all(bind=engine)
 
 #fastapi instance
@@ -39,8 +39,12 @@ asset_link_file = './assetlinks.json'
 #path operation
 @app.get("/") 
 def root(): 
-    return {"message": "Welcome to my post application"} 
+    return {"message": "Welcome to my post application", 
+            "instructions" : 
+                [f"""type "/docs" in the url to access the api schema""", 
+                 "register for an account", 
+                 "login to access the other api endpoints (api automatically authenticated from login)"]} 
 
-@app.get("/.well-known/assetlinks.json", response_class=FileResponse)
+@app.get("/.well-known/assetlinks.json", response_class=FileResponse, include_in_schema=False)
 def suppress_google_warnings():
     return asset_link_file
