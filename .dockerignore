@@ -7,6 +7,7 @@ Dockerfile
 Procfile
 nginx
 gunicorn.service
+.git
 *.zip
 *.docx
 *.tmp
