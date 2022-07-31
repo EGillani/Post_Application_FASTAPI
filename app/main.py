@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse
 
 #this will create our models (this will create the posts table automatically)
 #now uncommented since I implemented alembic (handles updates of our table schema and changes which sqlalchemy lacks)
+#July 31st - so I discovered that if you are starting from scratch...you need this :( ...tutorial lied 
 #models.Base.metadata.create_all(bind=engine)
 
 #fastapi instance
