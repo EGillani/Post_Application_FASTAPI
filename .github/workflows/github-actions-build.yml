@@ -1,0 +1,10 @@
+name: Build and Deploy PostIt Application
+on: [push, pull_request]
+jobs:
+  jobs1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v2
+      - name: say hi to eraj
+        run: echo "hello eraj"
