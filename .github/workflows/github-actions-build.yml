@@ -1,7 +1,7 @@
 name: Build and Deploy PostIt Application
 on: [push, pull_request]
 jobs:
-  jobs1:
+  build:
     environment:
       name: testing #from github action environment
     env: #all of these are saved on the github repo environments
@@ -13,14 +13,15 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
+    
     services:
-      postgres: #this is from github actions (service container - a docker image)
+      postgres: 
         image: postgres
         env:
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
           POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
         ports:
-          - 5432:5432 #have to hardcode these values :(
+          - 5432:5432 
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
