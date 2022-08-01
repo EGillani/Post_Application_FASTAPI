@@ -9,7 +9,7 @@ router = APIRouter(
     prefix="/posts",
     tags=['Posts']
 )
-#NOTE: HE MADE ALL POSTS ENDPOINT PUBLIC (NOT POSTS SPECIFIC TO THE USER)
+#NOTE: POSTS ENDPOINT PUBLIC (NOT POSTS SPECIFIC TO THE USER)
 #get all the posts 
 @router.get("/", response_model=List[schemas.PostOut])
 #whatever type of you put for the dependency returns doesn't matter 

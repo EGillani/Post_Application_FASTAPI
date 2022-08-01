@@ -5,7 +5,7 @@ from .. import database, schemas, models, utils, oauth2
 
 router = APIRouter(tags=['Authentication'])
 
-@router.post('/login', response_model=schemas.Token)
+@router.post('/login',summary="Access and refresh tokens for user (does not automatically grant access to other endpoints in /docs)", response_model=schemas.Token)
 def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(database.get_db)):
     
     #the OAuth2PasswordRequestForm will return the username and password (no email etc., but username will be our email) 
