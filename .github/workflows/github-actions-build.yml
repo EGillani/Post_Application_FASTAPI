@@ -13,7 +13,6 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
-    
     services:
       postgres: #this is from github actions (service container - a docker image)
         image: postgres
@@ -44,4 +43,4 @@ jobs:
       - name: test with pytest
         run: |
           pip install pytest
-          python -m pytest 
+          pytest 
