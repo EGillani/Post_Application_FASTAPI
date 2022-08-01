@@ -25,12 +25,12 @@ limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     return posts
 
 #adding a new post
-@router.post("/", status_code=status.HTTP_201_CREATED) #by default send a 201 status code 
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post) #by default send a 201 status code 
 #added a dependency saying the user has to be logged in (oauth2) 
 def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
     #create a new post with the model 
     #new_post = models.Post(title=post.title, content=post.content, published=post.published)
-    new_post = models.Post(user_id=current_user.id, **post.dict()) #the ** helps us avoid typing it all out like above 
+    new_post = models.Post(owner_id=current_user.id, **post.dict()) #the ** helps us avoid typing it all out like above 
     db.add(new_post)
     #commit the changes 
     db.commit()
@@ -61,7 +61,7 @@ def delete_post(id : int, db: Session = Depends(get_db), current_user: object = 
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail=f"post with id: {id} does not exist")
 
     #making sure the user is only deleting their own posts 
-    if post.user_id != current_user.id:
+    if post.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
 
     #read docs to understand this 
@@ -81,7 +81,7 @@ def update_post(id: int, updated_post: schemas.PostCreate, db: Session = Depends
     if post == None:
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail=f"post with id: {id} does not exist")
     
-    if post.user_id != current_user.id:
+    if post.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
 
     #chaining to the query method

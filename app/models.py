@@ -12,7 +12,7 @@ class Post(Base):
     content = Column(String, nullable=False)
     published = Column(Boolean, server_default='TRUE', nullable=False) 
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default= text('now()'))
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     #no impact in the database, but gives us information on the user (figures out the relationship) 
     #sqlalchemy will do this 
     owner = relationship("User")

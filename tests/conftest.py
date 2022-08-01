@@ -56,6 +56,7 @@ def test_user(client):
     new_user['password'] = user_data['password']
     return new_user
 
+#don't want to run all tests with two users only some so created another user like this 
 @pytest.fixture
 def another_test_user(client):
     user_data = {"email": "eve123@gmail.com",
@@ -93,20 +94,20 @@ def test_posts(test_user, session, another_test_user):
     posts_data = [{
         "title": "first title",
         "content": "first content",
-        "user_id": test_user['id']
+        "owner_id": test_user['id']
     }, {
         "title": "2nd title",
         "content": "2nd content",
-        "user_id": test_user['id']
+        "owner_id": test_user['id']
     },
         {
         "title": "3rd title",
         "content": "3rd content",
-        "user_id": test_user['id']
+        "owner_id": test_user['id']
     }, {
         "title": "3rd title",
         "content": "3rd content",
-        "user_id": another_test_user['id']
+        "owner_id": another_test_user['id']
     }]
 
     def create_post_model(post):
@@ -121,4 +122,12 @@ def test_posts(test_user, session, another_test_user):
     session.commit()
 
     posts = session.query(models.Post).all()
+    #this returns a sqlachlemy model
     return posts
+
+#making sure a post already has a vote for our tests 
+@pytest.fixture()
+def test_vote(test_posts, session, test_user):
+    new_vote = models.Vote(post_id=test_posts[3].id, user_id=test_user['id'])
+    session.add(new_vote)
+    session.commit()
