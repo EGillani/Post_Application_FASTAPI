@@ -13,6 +13,9 @@ from alembic import command
 
 #make a test database (create it first in postgres)
 #SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost:5432/fastapi_test"
+
+#August 1st revision: had to change the db name to postgres because my github actions would fail on fastapi_test
+#wouldn't create a new db fastapi_test  and reading the docs,they only specify the password
 SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost:5432/postgres"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
