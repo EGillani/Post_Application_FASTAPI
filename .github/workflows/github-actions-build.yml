@@ -21,7 +21,7 @@ jobs:
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
           POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
         ports:
-          - 5432:5432
+          - 5432:5432 #have to hardcode these values :(
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -44,4 +44,4 @@ jobs:
       - name: test with pytest
         run: |
           pip install pytest
-          pytest
+          python -m pytest 
