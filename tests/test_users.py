@@ -15,7 +15,7 @@ def test_create_user(client):
 #its data because our login is a form (may cause issues if you change the form type)
 def test_login_user(test_user, client):
     res = client.post(
-        "/login", data={"username": test_user['email'], "password": test_user['password']})
+        "/token", data={"username": test_user['email'], "password": test_user['password']})
     
     login_res = schemas.Token(**res.json())
 
@@ -36,6 +36,6 @@ def test_login_user(test_user, client):
 ])
 def test_incorrect_login(test_user, client, email, password, status_code):
     res = client.post(
-        "/login", data={"username": email, "password": password})
+        "/token", data={"username": email, "password": password})
 
     assert res.status_code == status_code
