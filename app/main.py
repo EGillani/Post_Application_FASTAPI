@@ -36,7 +36,7 @@ tags_metadata = [
     },
     {
         "name": "Authentication",
-        "description": "Login with your account credentials to obtain bearer (does **not** automatically authenticate endpoints on FastAPI docs).",
+        "description": "Login with your account credentials to obtain bearer token (does **not** authenticate endpoints directly on FastAPI docs).",
     }
 ]
 
