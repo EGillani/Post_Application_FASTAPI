@@ -10,8 +10,48 @@ from fastapi.responses import FileResponse
 #July 31st - so I discovered that if you are starting from scratch...you need this :( ...tutorial lied 
 #models.Base.metadata.create_all(bind=engine)
 
+description = """
+_OpenSource RESTful API to keep track of your posts!_ 🚀
+
+## First-Time Users
+* You can **create** a brand new account with _/users_.
+
+## Authentication 
+* Select the green **`Authorize`** button to **login** and unlock all endpoints on fastapi docs.
+* You can login using _/token_ with your account details to retrieve a oauth2.0 **bearer token** for custom api use (ex. Postman).
+"""
+
+tags_metadata = [
+    {
+        "name": "Users",
+        "description": "You can create a new user and obtain user details by id (**Authentication** required)."
+    },
+    {
+        "name": "Posts",
+        "description": "CRUD Operations with posts. **Authentication** required for all endpoints.",
+    },
+    {
+        "name": "Vote",
+        "description": "Vote on your favorite posts. The _dir_ of 1 means upvoting a post, 0 means downvoting. **Authentication** required.",
+    },
+    {
+        "name": "Authentication",
+        "description": "Login with your account credentials to obtain bearer (does **not** automatically authenticate endpoints on FastAPI docs).",
+    }
+]
+
 #fastapi instance
-app = FastAPI()
+app = FastAPI(
+    title="Post It",
+    description=description,
+    version="1.2.1",
+    contact={
+        # "name": "Eve",
+        # "url": "https://www.linkedin.com/in/erajg/",
+        "email": "e_gillani@fanshaweonline.com",
+    },
+    openapi_tags=tags_metadata
+)
 
 origins = ["*"]
 #CORSMiddleware runs before any request 
@@ -26,10 +66,12 @@ app.add_middleware(
 
 #router object - split our path operations cleaner into files 
 #include all the routes in the file we indicated
-app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(post.router)
 app.include_router(vote.router)
+
+
 
 
 #path of lookalike google digital asset file to supress warnings

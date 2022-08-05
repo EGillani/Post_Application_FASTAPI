@@ -4,7 +4,7 @@ from typing import Optional
 
 class UserCreate(BaseModel):
     email: EmailStr
-    password: str
+    password: str 
 
 class UserOut(BaseModel):
     id: int

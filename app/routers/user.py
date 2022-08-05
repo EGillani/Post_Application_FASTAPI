@@ -11,11 +11,11 @@ router = APIRouter(
 
 #adding a new user (UserOut removes the password field)
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut) #by default send a 201 status code 
+#don't use query parameters it will show in the url path!
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
     #create the hash of the password and update the password with the hashed version 
     user.password = utils.hash(user.password)
-
     new_user = models.User(**user.dict())
     db.add(new_user)
     db.commit()

@@ -6,8 +6,8 @@ from . import schemas, database, models
 from sqlalchemy.orm import Session
 from .config import settings
 
-#provide the endpoint of our login - no slash 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
+#provide the endpoint of our login/token - no slash 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 
 #SECRET KEY -> verifies data integrity -resides on our server 
 #Algorithm

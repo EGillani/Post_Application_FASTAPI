@@ -9,6 +9,8 @@ router = APIRouter(
     prefix="/posts",
     tags=['Posts']
 )
+
+
 #NOTE: POSTS ENDPOINT PUBLIC (NOT POSTS SPECIFIC TO THE USER)
 #get all the posts 
 @router.get("/", response_model=List[schemas.PostOut])
@@ -42,7 +44,7 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), curren
 @router.get("/{id}", response_model=schemas.PostOut)
 #still want it as an int to make sure the type validation for the route works (user doesn't type in the route incorrectly)
 #don't use .all() because it will keep looking for all matches, we know it only exists once 
-def get_posts(id: int, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
+def get_post(id: int, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
     post = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.id == id).first()
 
     if not post: 
