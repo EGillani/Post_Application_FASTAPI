@@ -17,8 +17,8 @@ _OpenSource RESTful API to keep track of your posts!_ 🚀
 * You can **create** a brand new account with _/users_.
 
 ## Authentication 
-* Select the green **`Authorize`** button to **login** and unlock all endpoints on fastapi docs.
-* You can login using _/token_ with your account details to retrieve a oauth2.0 **bearer token** for custom api use (ex. Postman).
+* On FastAPI docs select the green **`Authorize`** button to **login** and unlock all endpoints.
+* For custom use (ex. Postman), use _/token_ with your account details to retrieve a oauth2.0 **bearer token**.
 """
 
 tags_metadata = [
