@@ -51,7 +51,7 @@ def client(session):
 def test_user(client):
     user_data = {"email": "hello123@gmail.com",
                  "password": "password123"}
-    res = client.post("/users/", json=user_data)
+    res = client.post("/users", json=user_data)
 
     assert res.status_code == 201
 
@@ -65,7 +65,7 @@ def test_user(client):
 def another_test_user(client):
     user_data = {"email": "eve123@gmail.com",
                  "password": "password123"}
-    res = client.post("/users/", json=user_data)
+    res = client.post("/users", json=user_data)
 
     assert res.status_code == 201
 
