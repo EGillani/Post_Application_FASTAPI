@@ -32,7 +32,7 @@ class PostCreate(PostBase):
 class Post(PostBase):
     id: int
     created_at: datetime
-    owner_id : int
+    #owner_id : int
     owner: UserOut #this is defined in the orm models 
     #the properties are already inherited from the base class 
     class Config: 
