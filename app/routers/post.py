@@ -13,7 +13,7 @@ router = APIRouter(
 
 #NOTE: POSTS ENDPOINT PUBLIC (NOT POSTS SPECIFIC TO THE USER)
 #get all the posts 
-@router.get("/", response_model=List[schemas.PostOut])
+@router.get("", response_model=List[schemas.PostOut])
 #whatever type of you put for the dependency returns doesn't matter 
 #limit - brings back only a certain number of posts but max 10 
 #skip - skips over posts (useful for pagination)
@@ -27,9 +27,9 @@ limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     return posts
 
 #adding a new post
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post) #by default send a 201 status code 
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=schemas.Post) #by default send a 201 status code 
 #added a dependency saying the user has to be logged in (oauth2) 
-def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
+def create_post(post: schemas.PostCreate, db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)): 
     #create a new post with the model 
     #new_post = models.Post(title=post.title, content=post.content, published=post.published)
     new_post = models.Post(owner_id=current_user.id, **post.dict()) #the ** helps us avoid typing it all out like above 

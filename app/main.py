@@ -32,7 +32,7 @@ tags_metadata = [
     },
     {
         "name": "Vote",
-        "description": "Vote on your favorite posts. The _dir_ of 1 means upvoting a post, 0 means downvoting. **Authentication** required.",
+        "description": "Vote on your favorite posts. _dir_ of 1 means upvoting a post, 0 means downvoting. **Authentication** required.",
     },
     {
         "name": "Authentication",
