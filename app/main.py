@@ -11,7 +11,7 @@ from fastapi.responses import FileResponse
 #models.Base.metadata.create_all(bind=engine)
 
 description = """
-_OpenSource RESTful API to keep track of your posts!_ 🚀
+_RESTful API to keep track of your posts!_ 🚀
 
 ## First-Time Users
 * You can **create** a brand new account with _/users_.
@@ -44,7 +44,7 @@ tags_metadata = [
 app = FastAPI(
     title="Post It",
     description=description,
-    version="1.2.1",
+    version="1.2.5",
     contact={
         # "name": "Eve",
         # "url": "https://www.linkedin.com/in/erajg/",

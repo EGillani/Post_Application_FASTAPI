@@ -13,9 +13,7 @@ def test_create_user(client):
     assert res.status_code == 201
 
 def test_create_duplicate_user(test_user,client):
-    # user = client.post(
-    #     "/users", json={"email": "hello123@gmail.com", "password": "password123"})
-    
+
     dup_user = client.post(
         "/users", json={"email": "hello123@gmail.com", "password": "password123"})
     assert dup_user.status_code == 400
