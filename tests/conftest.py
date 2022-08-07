@@ -52,7 +52,6 @@ def test_user(client):
     user_data = {"username": "hello123",
                  "password": "password123"}
     res = client.post("/users", json=user_data)
-
     assert res.status_code == 201
 
     new_user = res.json()
@@ -98,19 +97,23 @@ def test_posts(test_user, session, another_test_user):
     posts_data = [{
         "title": "first title",
         "content": "first content",
+        "published": True,
         "owner_id": test_user['id']
     }, {
         "title": "2nd title",
         "content": "2nd content",
+        "published": True,
         "owner_id": test_user['id']
     },
         {
         "title": "3rd title",
         "content": "3rd content",
+        "published": False,
         "owner_id": test_user['id']
     }, {
         "title": "3rd title",
         "content": "3rd content",
+        "published": True,
         "owner_id": another_test_user['id']
     }]
 
