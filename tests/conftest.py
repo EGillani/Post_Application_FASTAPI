@@ -49,7 +49,7 @@ def client(session):
     
 @pytest.fixture
 def test_user(client):
-    user_data = {"email": "hello123@gmail.com",
+    user_data = {"username": "hello123",
                  "password": "password123"}
     res = client.post("/users", json=user_data)
 
@@ -63,7 +63,7 @@ def test_user(client):
 #don't want to run all tests with two users only some so created another user like this 
 @pytest.fixture
 def another_test_user(client):
-    user_data = {"email": "eve123@gmail.com",
+    user_data = {"username": "eve123",
                  "password": "password123"}
     res = client.post("/users", json=user_data)
 

@@ -1,4 +1,3 @@
-from email.policy import HTTP
 from typing import List, Optional
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session

@@ -1,5 +1,4 @@
 from fastapi import status, HTTPException, Depends, APIRouter
-from pydantic import EmailStr
 from sqlalchemy.orm import Session
 from .. import models,schemas, utils 
 from ..database import get_db
@@ -30,7 +29,12 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         logger.error(e)
         db.rollback()
         raise  HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
-                             detail="Integrity error! Please make sure the email is not already registered in this application!")
+                             detail="Integrity error! Please make sure the username is not already registered in this application!")
+    except SQLAlchemyError as e:
+        logger.error(e)
+        db.rollback()
+        raise  HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, 
+                             detail="SqlAlchemyError! Reach out to developer and sorry for the inconvenience!")
     except Exception as e:
         logger.error(e)
         db.rollback()
@@ -39,9 +43,9 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 @router.get('', response_model=schemas.UserOut)
-def get_user(email: EmailStr,  db: Session = Depends(get_db)):
+def get_user(username: str,  db: Session = Depends(get_db)):
     try:
-        user = db.query(models.User).filter(models.User.email == email).first()
+        user = db.query(models.User).filter(models.User.username == username).first()
     except Exception as e:
         logger.error(e)
         db.rollback()
