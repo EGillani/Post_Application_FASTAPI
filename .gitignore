@@ -4,3 +4,4 @@ venv/
 *.zip
 *.docx
 *.tmp
+docker-compose-dev.yml
