@@ -59,9 +59,9 @@ INFO:     Application startup complete.
 <details markdown="1">
 <summary>About the command <code>uvicorn main:app --reload</code>...</summary>
 
-The command `uvicorn main:app` refers to:
+The command `uvicorn app.main:app` refers to:
 
-* `main`: the file `main.py` (the Python "module").
+* `main`: the file `main.py` (the Python "module") inside the directory `app`.
 * `app`: the object created inside of `main.py` with the line `app = FastAPI()`.
 * `--reload`: make the server restart after code changes. Only do this for development.
 
@@ -69,7 +69,7 @@ The command `uvicorn main:app` refers to:
 
 ### Check it
 
-Open your browser at <a href="http://127.0.0.1:8000" class="external-link" target="_blank">http://127.0.0.1:8000/items/5?q=somequery</a>.
+Open your browser at <a href="http://127.0.0.1:8000" class="external-link" target="_blank">http://127.0.0.1:8000</a>.
 
 You will see the JSON response as:
 
@@ -83,12 +83,8 @@ Now go to <a href="http://127.0.0.1:8000/docs" class="external-link" target="_bl
 
 You will see the automatic interactive API documentation (provided by <a href="https://github.com/swagger-api/swagger-ui" class="external-link" target="_blank">Swagger UI</a>):
 
-![Swagger UI](https://fastapi.tiangolo.com/img/index/index-01-swagger-ui-simple.png)
-
 ### Alternative API docs
 
 And now, go to <a href="http://127.0.0.1:8000/redoc" class="external-link" target="_blank">http://127.0.0.1:8000/redoc</a>.
 
 You will see the alternative automatic documentation (provided by <a href="https://github.com/Rebilly/ReDoc" class="external-link" target="_blank">ReDoc</a>):
-
-![ReDoc](https://fastapi.tiangolo.com/img/index/index-02-redoc-simple.png)
