@@ -23,6 +23,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 Mako==1.2.1
 MarkupSafe==2.1.1
+numpy==1.23.1
 orjson==3.6.8
 passlib==1.7.4
 psycopg2==2.9.3
@@ -35,6 +36,7 @@ python-multipart==0.0.5
 PyYAML==6.0
 requests==2.27.1
 rsa==4.8
+scipy==1.9.0
 six==1.16.0
 sniffio==1.2.0
 SQLAlchemy==1.4.36
@@ -43,6 +45,7 @@ typing_extensions==4.2.0
 ujson==5.2.0
 urllib3==1.26.9
 uvicorn==0.17.6
+uvtools==0.1.0
 watchgod==0.8.2
 websockets==10.3
 zipp==3.8.1
