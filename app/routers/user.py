@@ -44,10 +44,10 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
                              detail=f"Oh no, something went horribly wrong, you can let the developer know! They are sorry!")
     return new_user
 
-@router.get('', response_model=schemas.UserOut)
-def get_user(username: str,  db: Session = Depends(get_db)):
+@router.get('/{id}', response_model=schemas.UserOut)
+def get_user(id: str,  db: Session = Depends(get_db)):
     try:
-        user = db.query(models.User).filter(models.User.username == username).first()
+        user = db.query(models.User).filter(models.User.id == id).first()
     except Exception as e:
         logger.error(e)
         db.rollback()
@@ -57,7 +57,6 @@ def get_user(username: str,  db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} does not exist")
     
     return user
-
 
 @router.get('/{id}/posts', response_model=List[schemas.PostOut])
 def get_user_posts(id: int,  db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)):
