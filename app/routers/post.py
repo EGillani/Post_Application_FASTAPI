@@ -15,7 +15,7 @@ router = APIRouter(
 #whatever type of you put for the dependency returns doesn't matter 
 #limit - brings back only a certain number of posts but max 10 
 #skip - skips over posts (useful for pagination)
-def get_posts(db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user),
+def get_posts(db: Session = Depends(get_db),
 limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     
     #by default its a left inner join 

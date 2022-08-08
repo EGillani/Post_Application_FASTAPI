@@ -58,7 +58,7 @@ def get_user(id: str,  db: Session = Depends(get_db)):
     
     return user
 
-@router.get('/{id}/posts', response_model=List[schemas.PostOut], summary='Get User Posts (inc. unpublished posts)')
+@router.get('/{id}/posts', response_model=List[schemas.PostOut], summary='Get User Posts (including unpublished posts)')
 def get_user_posts(id: int,  db: Session = Depends(get_db), current_user: object = Depends(oauth2.get_current_user)):
             
     #making sure the user is only viewing their own posts 
