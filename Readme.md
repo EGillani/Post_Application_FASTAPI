@@ -1,9 +1,9 @@
 
 ## Requirements
 
-Python 3.6+
-Postgres/PgAdmin (For Database)
-Docker for Desktop (Optional)
+#### Python 3.6+
+#### Postgres/PgAdmin (For Database)
+#### Docker for Desktop (Optional)
 
 FastAPI stands on the shoulders of giants:
 
@@ -35,6 +35,15 @@ Download all packages found in the requirements.txt file
 
 ```console
 $ pip install -r requirements.txt
+
+```
+</div>
+
+Make a .env file (use .env.sample as an example). Fill in the values.  
+<div class="termy">
+
+```console
+$ touch .env
 
 ```
 </div>
