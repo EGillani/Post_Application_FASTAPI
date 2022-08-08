@@ -44,7 +44,7 @@ tags_metadata = [
 app = FastAPI(
     title="Post It",
     description=description,
-    version="1.2.5",
+    version="2.1.0",
     contact={
         # "name": "Eve",
         # "url": "https://www.linkedin.com/in/erajg/",
@@ -82,9 +82,7 @@ asset_link_file = './assetlinks.json'
 def root(): 
     return {"message": "Welcome to my post application", 
             "instructions" : 
-                [f"""type "/docs" in the url to access the api schema""", 
-                 f"""register for an account using "Creater User" """, 
-                 f"""login to access the other api endpoints (all endpoints authenticated automatically for session)"""]} 
+                [f"""type "/docs" in the url to access the api schema"""]} 
 
 @app.get("/.well-known/assetlinks.json", response_class=FileResponse, include_in_schema=False)
 def suppress_google_warnings():

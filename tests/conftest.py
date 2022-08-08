@@ -98,20 +98,24 @@ def test_posts(test_user, session, another_test_user):
     posts_data = [{
         "title": "first title",
         "content": "first content",
-        "owner_id": test_user['id']
+        "owner_id": test_user['id'],
+        "published": True
     }, {
         "title": "2nd title",
         "content": "2nd content",
-        "owner_id": test_user['id']
+        "owner_id": test_user['id'],
+        "published": True
     },
         {
         "title": "3rd title",
         "content": "3rd content",
-        "owner_id": test_user['id']
+        "owner_id": test_user['id'],
+        "published": False
     }, {
         "title": "3rd title",
         "content": "3rd content",
-        "owner_id": another_test_user['id']
+        "owner_id": another_test_user['id'],
+        "published": True
     }]
 
     def create_post_model(post):

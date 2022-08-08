@@ -20,7 +20,7 @@ limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     
     #by default its a left inner join 
     #also filtering at the same time 
-    posts = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+    posts = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search), models.Post.published == True).limit(limit).offset(skip).all()
 
     return posts
 

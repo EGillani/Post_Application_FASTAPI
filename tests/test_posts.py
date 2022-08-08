@@ -11,9 +11,19 @@ def test_get_all_posts(authorized_client, test_posts):
     #posts_map = map(validate, res.json())
     #posts_list = list(posts_map)
 
-    assert len(res.json()) == len(test_posts)
+    assert len(res.json()) == len(test_posts) -1 
     assert res.status_code == 200
 
+def test_get_user_posts(authorized_client, test_posts):
+    res = authorized_client.get("/users/1/posts")
+
+    assert len(res.json()) == len(test_posts) - 1
+    assert res.status_code == 200
+
+def test_not_authorized_get_user_posts(authorized_client):
+    res = authorized_client.get("/users/8888/posts")
+
+    assert res.status_code == 403
 
 def test_unauthorized_user_get_all_posts(client, test_posts):
     res = client.get("/posts")
