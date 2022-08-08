@@ -27,7 +27,9 @@ def test_not_authorized_get_user_posts(authorized_client):
 
 def test_unauthorized_user_get_all_posts(client, test_posts):
     res = client.get("/posts")
-    assert res.status_code == 401
+    #made this endpoint public
+    #assert res.status_code == 401
+    assert res.status_code == 200
 
 
 def test_unauthorized_user_get_one_post(client, test_posts):
