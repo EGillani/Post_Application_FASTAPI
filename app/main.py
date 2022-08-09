@@ -28,7 +28,7 @@ tags_metadata = [
     },
     {
         "name": "Posts",
-        "description": "CRUD Operations with posts. **Authentication** required for all endpoints except Get Posts.",
+        "description": "CRUD Operations with posts. **Authentication** required for all endpoints except _Get_ _Posts_.",
     },
     {
         "name": "Vote",
