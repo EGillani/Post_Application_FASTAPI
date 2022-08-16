@@ -81,7 +81,7 @@ asset_link_file = './assetlinks.json'
 @app.get("/", include_in_schema=False) 
 def root(): 
     return {"message": "Welcome to my post application", 
-            "instructions" : f"""type _/docs_ in the url to access the api schema"""} 
+            "instruction" : f"type /docs in the url to access the api documentation"} 
 
 @app.get("/.well-known/assetlinks.json", response_class=FileResponse, include_in_schema=False)
 def suppress_google_warnings():
